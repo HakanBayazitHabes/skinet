@@ -3,12 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
-    public class StoreContext : DbContext
+    public class StoreContext(DbContextOptions options) : DbContext(options)
     {
-        public StoreContext(DbContextOptions options) : base(options)
-        {
-        }
-
-        DbSet<Product> Products { get; set; }
+        public DbSet<Product> Products { get; set; }
     }
 }
