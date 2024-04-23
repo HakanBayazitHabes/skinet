@@ -17,7 +17,7 @@ namespace Infrastructure.Data
 
             if (spec.Criteria != null)
             {
-                query = query.Where(spec.Criteria);
+                query = query.Where(spec.Criteria);  // spec.Criteria for example : p => p.ProductTypeId == id
             }
 
             query = spec.Includes.Aggregate(query, (current, include) => current.Include(include));
