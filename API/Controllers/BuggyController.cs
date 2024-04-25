@@ -1,3 +1,4 @@
+using API.Errors;
 using Core.Data;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,7 +15,7 @@ namespace API.Controllers
 
             if (thing == null)
             {
-                return NotFound();
+                return NotFound(new ApiResponse(404));
             }
 
             return Ok();
@@ -34,7 +35,7 @@ namespace API.Controllers
         public ActionResult GetBadRequest()
         {
 
-            return BadRequest();
+            return BadRequest(new ApiResponse(404));
         }
 
         [HttpGet("badrequest/{id}")]
