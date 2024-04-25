@@ -9,13 +9,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
     public class ProductsController(
         IGenericRepository<Product> productsRepo,
         IGenericRepository<ProductBrand> productBrandsRepo,
         IGenericRepository<ProductType> productTypesRepo,
-        IMapper mapper) : ControllerBase
+        IMapper mapper) : BaseApiController
     {
 
         private readonly IGenericRepository<Product> _productsRepo = productsRepo;
