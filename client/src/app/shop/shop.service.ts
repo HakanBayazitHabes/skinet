@@ -20,7 +20,7 @@ export class ShopService {
     if (shopParams.brandId > 0) {
       params = params.append('brandId', shopParams.brandId);
     }
-    if (shopParams.typeId) {
+    if (shopParams.typeId)  {
       params = params.append('typeId', shopParams.typeId);
     }
     params = params.append('sort', shopParams.sort);
@@ -31,6 +31,10 @@ export class ShopService {
     return this.http.get<Pagination<Product[]>>(this.baseUrl + 'products', {
       params,
     });
+  }
+
+  getProduct(id: number) {
+    return this.http.get<Product>(this.baseUrl + 'products/' + id);
   }
 
   getBrands() {
