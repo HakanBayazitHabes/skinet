@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class TestErrorComponent {
   baseUrl = environment.apiUrl;
+  validationErrors: string[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -52,6 +53,7 @@ export class TestErrorComponent {
       },
       error: (error) => {
         console.log(error);
+        this.validationErrors = error.errors;
       },
     });
   }
