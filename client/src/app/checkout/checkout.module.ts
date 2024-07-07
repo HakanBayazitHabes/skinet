@@ -9,7 +9,7 @@ import { CheckoutRoutingModule } from './checkout-routing.module';
   declarations: [
     CheckoutComponent
   ],
-  imports: [
+  imports: [ 
     CommonModule,
     CheckoutRoutingModule
   ]
