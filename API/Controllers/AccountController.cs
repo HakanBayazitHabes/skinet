@@ -1,17 +1,17 @@
 using API.Dtos;
 using API.Errors;
+using Core;
 using Core.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    public class AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager) : BaseApiController
+    public class AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ITokenService tokenService) : BaseApiController
     {
-        public readonly UserManager<AppUser> _userManager = userManager;
-        public readonly SignInManager<AppUser> _signInManager = signInManager;
-
-
+        private readonly UserManager<AppUser> _userManager = userManager;
+        private readonly SignInManager<AppUser> _signInManager = signInManager;
+        private readonly ITokenService _tokenService = tokenService;
 
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
@@ -27,7 +27,7 @@ namespace API.Controllers
             return new UserDto
             {
                 Email = user.Email,
-                Token = "This will be a token",
+                Token = _tokenService.CreateToken(user),
                 DisplayName = user.DisplayName
             };
         }
@@ -49,7 +49,7 @@ namespace API.Controllers
             return new UserDto
             {
                 DisplayName = user.DisplayName,
-                Token = "This will be a token",
+                Token = _tokenService.CreateToken(user),
                 Email = user.Email
             };
         }
