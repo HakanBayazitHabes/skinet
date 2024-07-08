@@ -32,7 +32,8 @@ public static class IdentityServiceExtensions
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Token:Key"])),
                     ValidIssuer = config["Token:Issuer"],
-                    ValidateIssuer = true
+                    ValidateIssuer = true,
+                    ValidateAudience = false // our audience would be our client application, the domain that's being hosted on
                 };
             });
 
