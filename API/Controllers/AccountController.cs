@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using API.Dtos;
 using API.Errors;
+using AutoMapper;
 using Core;
 using Core.Entities.Identity;
 using Microsoft.AspNetCore.Authorization;
@@ -9,24 +10,22 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    public class AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ITokenService tokenService) : BaseApiController
+    public class AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ITokenService tokenService, IMapper mapper) : BaseApiController
     {
         private readonly UserManager<AppUser> _userManager = userManager;
         private readonly SignInManager<AppUser> _signInManager = signInManager;
         private readonly ITokenService _tokenService = tokenService;
-
+        private readonly IMapper _mapper = mapper;
 
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
         {
-            var email = User.FindFirstValue(ClaimTypes.Email);
-
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await _userManager.FindByEmailFromClaimsPrincipal(User);
 
             return new UserDto
             {
-                Email = email,
+                Email = user.Email,
                 Token = _tokenService.CreateToken(user),
                 DisplayName = user.DisplayName
             };
@@ -40,13 +39,11 @@ namespace API.Controllers
 
         [HttpGet("address")]
         [Authorize]
-        public async Task<ActionResult<Address>> GetUserAddress()
+        public async Task<ActionResult<AddressDto>> GetUserAddress()
         {
-            var email = User.FindFirstValue(ClaimTypes.Email);
+            var user = await _userManager.FindUserByClaimsPrincipleWithAddress(HttpContext.User);
 
-            var user = await _userManager.FindByEmailAsync(email);
-
-            return user.Address;
+            return _mapper.Map<Address, AddressDto>(user.Address);
         }
 
         [HttpPost("login")]
