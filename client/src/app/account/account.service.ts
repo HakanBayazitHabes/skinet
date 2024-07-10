@@ -28,7 +28,7 @@ export class AccountService {
     return this.http.post<User>(this.baseUrl + 'account/register', values).pipe(
       map(user => {
         localStorage.setItem('token', user.token);
-        this.currentUserSource.next(user);
+        this.currentUserSource.next(user)
       })
     )
   }
