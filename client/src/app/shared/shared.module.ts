@@ -12,6 +12,6 @@ import { TextInputComponent } from './components/text-input/text-input.component
 @NgModule({
   declarations: [PaginHeaderComponent, PagerComponent, OrderTotalsComponent, TextInputComponent],
   imports: [CommonModule, PaginationModule.forRoot(), CarouselModule.forRoot(), ReactiveFormsModule, BsDropdownModule.forRoot()],
-  exports: [PaginationModule, PaginHeaderComponent, PagerComponent, CarouselModule, OrderTotalsComponent, ReactiveFormsModule, BsDropdownModule],
+  exports: [PaginationModule, PaginHeaderComponent, PagerComponent, CarouselModule, OrderTotalsComponent, ReactiveFormsModule, BsDropdownModule, TextInputComponent],
 })
 export class SharedModule { }
