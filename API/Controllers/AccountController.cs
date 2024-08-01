@@ -4,6 +4,7 @@ using API.Errors;
 using AutoMapper;
 using Core;
 using Core.Entities.Identity;
+using Core.Entities.OrderAggregate;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
