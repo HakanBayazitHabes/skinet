@@ -6,7 +6,7 @@ using Core.Entities.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Infrastructure;
+namespace Infrastructure.Services;
 
 public class TokenService : ITokenService
 {

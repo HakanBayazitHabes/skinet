@@ -488,3 +488,4 @@ API/skinet.db-shm
 API/identity.db
 API/identity.db-shm
 API/identity.db-wal
+API/skinet.db
