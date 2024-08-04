@@ -32,6 +32,6 @@ public class OrdersController : BaseApiController
 
         if (order is null) return BadRequest(new ApiResponse(400, "Problem creating order"));
 
-        return Ok();
+        return Ok(order);
     }
 }
